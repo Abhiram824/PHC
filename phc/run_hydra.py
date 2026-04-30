@@ -92,7 +92,7 @@ def parse_sim_params(cfg):
         sim_params.physx.num_threads = 4
         sim_params.physx.use_gpu = cfg.sim.pipeline in ["gpu"]
         sim_params.physx.num_subscenes = cfg.sim.subscenes
-        if flags.test and not flags.im_eval:
+        if flags.test and not flags.im_eval or (flags.im_eval and cfg.env.num_envs <= 4):
             sim_params.physx.max_gpu_contact_pairs = 4 * 1024 * 1024
         else:
             sim_params.physx.max_gpu_contact_pairs = 16 * 1024 * 1024
